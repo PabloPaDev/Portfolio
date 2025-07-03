@@ -787,7 +787,7 @@ form button[type="submit"]:hover {
   font-size: 1.1em;
   line-height: 1.6;
   margin-bottom: 15px;
-  color: #333;
+  color: #000;
 }
 
 .sobre-mi-texto ul {
@@ -798,7 +798,7 @@ form button[type="submit"]:hover {
 .sobre-mi-texto ul li {
   margin-bottom: 8px;
   font-size: 1em;
-  color: #f7f3f3;
+  color: #000;
 }
 .proyectos-grid {
   display: grid;
