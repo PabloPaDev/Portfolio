@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presupuesto Base de Datos | Pablo Palacios</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header-interno">
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="home.html">Sobre mí</a></li>
+      <li><a href="proyectos.html">Proyectos</a></li>
+      <li><a href="contratacion.html">Contratación</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="contenido">
+  <h2>Presupuesto para creación de Base de Datos</h2>
+  <p>Selecciona las opciones para tu base de datos y recibe un presupuesto personalizado.</p>
+
+  <form id="form-bbdd">
+    <label for="tipoBBDD">Tipo de Base de Datos</label>
+    <select id="tipoBBDD" name="tipoBBDD">
+      <option value="SQL" data-precio="200">Relacional (SQL) - 200 €</option>
+      <option value="NoSQL" data-precio="300">No Relacional (NoSQL) - 300 €</option>
+      <option value="Mixta" data-precio="500">Mixta - 500 €</option>
+    </select>
+
+    <label for="tamano">Tamaño estimado</label>
+    <select id="tamano" name="tamano">
+      <option value="Pequeña" data-precio="0">Pequeña (hasta 5 tablas/colecciones)</option>
+      <option value="Media" data-precio="150">Media (hasta 15 tablas/colecciones) +150 €</option>
+      <option value="Grande" data-precio="300">Grande (ilimitado) +300 €</option>
+    </select>
+
+    <label for="extrasBBDD">Extras</label>
+    <select id="extrasBBDD" name="extrasBBDD">
+      <option value="Ninguno" data-precio="0">Ninguno</option>
+      <option value="Documentacion" data-precio="100">Documentación Técnica (+100 €)</option>
+      <option value="Diagrama" data-precio="75">Diagrama Entidad-Relación (+75 €)</option>
+    </select>
+
+    <label for="ideasBBDD">Cuéntame tus necesidades</label>
+    <textarea id="ideasBBDD" name="ideasBBDD" placeholder="Describe lo que necesitas..."></textarea>
+
+    <label for="nombre">Nombre completo</label>
+    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+
+    <label for="email">Email de contacto</label>
+    <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+
+    <button type="submit">Solicitar presupuesto</button>
+
+    <div class="detalle-presupuesto">
+      <p>Detalle del presupuesto:</p>
+      <ul id="detalleListaBBDD"></ul>
+      <p class="total" id="totalPresupuestoBBDD">Total: 0 €</p>
+    </div>
+  </form>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+  window.addEventListener('load', () => {
+    const USER_ID = 'rOAQmfz_oGTJ3AeQ8';
+    const SERVICE_ID = 'service_pablodev';
+    const TEMPLATE_ID = 'template_u1599m4';
+
+    emailjs.init(USER_ID);
+
+    const form = document.getElementById('form-bbdd');
+    const detalleLista = document.getElementById('detalleListaBBDD');
+    const totalPresupuesto = document.getElementById('totalPresupuestoBBDD');
+
+    function calcularTotal() {
+      const selects = ['tipoBBDD', 'tamano', 'extrasBBDD'];
+      let total = 0;
+      detalleLista.innerHTML = '';
+
+      selects.forEach(id => {
+        const select = form[id];
+        const option = select.options[select.selectedIndex];
+        const precio = Number(option.getAttribute('data-precio')) || 0;
+        total += precio;
+
+        const li = document.createElement('li');
+        li.textContent = option.text;
+        detalleLista.appendChild(li);
+      });
+
+      totalPresupuesto.textContent = `Total: ${total} €`;
+      return total;
+    }
+
+    form.addEventListener('change', calcularTotal);
+    calcularTotal();
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const total = calcularTotal();
+      const data = {
+        servicio: "Base de Datos",
+        tipoBBDD: form.tipoBBDD.value,
+        tamano: form.tamano.value,
+        extrasBBDD: form.extrasBBDD.value,
+        ideas: form.ideasBBDD.value,
+        nombre: form.nombre.value,
+        email: form.email.value,
+        total: `Total: ${total} €`,
+        plazo: '10 días laborables',
+        reply_to: form.email.value
+      };
+
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, data)
+        .then(() => {
+          alert('Presupuesto enviado correctamente. Revisa tu correo.');
+          form.reset();
+          calcularTotal();
+        })
+        .catch(err => {
+          console.error('Error enviando:', err);
+          alert('Error enviando el presupuesto. Revisa tu configuración de EmailJS.');
+        });
+    });
+  });
+</script>
+
+</body>
+</html>

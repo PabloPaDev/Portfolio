@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creación de Página Web | Pablo Palacios</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header-interno">
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="home.html">Sobre mí</a></li>
+      <li><a href="proyectos.html">Proyectos</a></li>
+      <li><a href="contratacion.html">Contratación</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="contenido">
+  <h2>Personaliza tu página web</h2>
+  <p>Selecciona las opciones para personalizar tu página web y obtén un presupuesto inmediato.</p>
+
+  <form id="form-web">
+    <label for="tipoPagina">Tipo de página</label>
+    <select id="tipoPagina" name="tipoPagina">
+      <option value="Basica" data-precio="150">Básica - 150 €</option>
+      <option value="Intermedia" data-precio="300">Intermedia - 300 €</option>
+      <option value="Avanzada" data-precio="600">Avanzada - 600 €</option>
+    </select>
+
+    <label for="numPaginas">Número de páginas</label>
+    <select id="numPaginas" name="numPaginas">
+      <option value="1" data-precio="0">1 página (incluida)</option>
+      <option value="2" data-precio="50">2 páginas (+50 €)</option>
+      <option value="3" data-precio="100">3 páginas (+100 €)</option>
+      <option value="4" data-precio="150">4 páginas (+150 €)</option>
+    </select>
+
+    <label for="extras">Extras</label>
+    <select id="extras" name="extras">
+      <option value="Ninguno" data-precio="0">Ninguno</option>
+      <option value="SEO" data-precio="100">SEO Básico (+100 €)</option>
+      <option value="Formulario" data-precio="50">Formulario de contacto (+50 €)</option>
+      <option value="Multilenguaje" data-precio="200">Multilenguaje (+200 €)</option>
+    </select>
+
+    <label for="diseno">Diseño</label>
+    <select id="diseno" name="diseno">
+      <option value="Estandar" data-precio="0">Plantilla estándar</option>
+      <option value="Personalizado" data-precio="300">Diseño personalizado (+300 €)</option>
+    </select>
+
+    <label for="ideas">Cuéntame tus ideas o necesidades</label>
+    <textarea id="ideas" name="ideas" placeholder="Describe brevemente lo que quieres..."></textarea>
+
+    <label for="nombre">Nombre completo</label>
+    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+
+    <label for="email">Email de contacto</label>
+    <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+
+    <button type="submit">Solicitar presupuesto</button>
+
+    <div class="detalle-presupuesto">
+      <p>Detalle del presupuesto:</p>
+      <ul id="detalleLista"></ul>
+      <p class="total" id="totalPresupuesto">Total: 0 €</p>
+    </div>
+  </form>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const USER_ID = 'rOAQmfz_oGTJ3AeQ8';
+    const SERVICE_ID = 'service_pablodev';
+    const TEMPLATE_ID = 'template_u1599m4';
+
+    emailjs.init(USER_ID);
+
+    const form = document.getElementById('form-web');
+    const detalleLista = document.getElementById('detalleLista');
+    const totalPresupuesto = document.getElementById('totalPresupuesto');
+
+    function calcularTotal() {
+      const selects = ['tipoPagina', 'numPaginas', 'extras', 'diseno'];
+      let total = 0;
+      detalleLista.innerHTML = '';
+
+      selects.forEach(id => {
+        const select = form[id];
+        const option = select.options[select.selectedIndex];
+        const precio = Number(option.getAttribute('data-precio')) || 0;
+        total += precio;
+
+        const li = document.createElement('li');
+        li.textContent = option.text;
+        detalleLista.appendChild(li);
+      });
+
+      totalPresupuesto.textContent = `Total: ${total} €`;
+      return total;
+    }
+
+    form.addEventListener('change', calcularTotal);
+    window.addEventListener('load', calcularTotal);
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const total = calcularTotal();
+      const data = {
+        servicio: "Página Web",
+        opcion1: form.tipoPagina.value,
+        opcion2: form.numPaginas.value,
+        extras: form.extras.value,
+        personalizacion: form.diseno.value,
+        ideas: form.ideas.value,
+        nombre: form.nombre.value,
+        email: form.email.value,
+        total: `Total: ${total} €`,
+        plazo: '15 días laborables'
+      };
+
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, data)
+        .then(() => {
+          alert('Presupuesto enviado correctamente.');
+          form.reset();
+          calcularTotal();
+        })
+        .catch(err => {
+          console.error('Error enviando:', err);
+          alert('Error enviando el presupuesto, revisa tu configuración de EmailJS.');
+        });
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,832 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos generales del body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #b0b0b0; /* Gris medio */
+  color: #222;
+}
+
+/* ---------------- LANDING (index.html) ---------------- */
+header {
+  background-image: url('img/ascii-pablopadev.png'); /* Cambia según tu imagen */
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh; /* Ocupa toda la pantalla */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centra verticalmente */
+  align-items: center;
+  text-align: center;
+  padding: 0;
+}
+
+header::before {
+  content: "";
+  background: rgba(0, 0, 0, 0.4); /* oscurece ligeramente la imagen */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+header h1 {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  font-size: 3em;
+  margin: 0 0 20px 0;
+}
+
+nav {
+  position: relative;
+  z-index: 2;
+  width: 60%;
+  max-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin: 0;
+}
+
+nav a {
+  flex: 1;
+  text-align: center;
+  padding: 15px 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 2px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 0 10px;
+  transition: background 0.3s, color 0.3s;
+  white-space: nowrap;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+nav a:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* ---------------- PÁGINAS INTERNAS ---------------- */
+.header-interno {
+  background-color: #222;
+  height: 300px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 10px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Menú principal en páginas internas */
+.header-interno nav {
+  width: 100%;
+  margin-top: auto;
+  position: relative;
+}
+
+.header-interno nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.header-interno nav ul li {
+  position: relative;
+}
+
+.header-interno nav ul li a {
+  display: block;
+  padding: 12px 25px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 0 rgba(255,255,255,0);
+  cursor: pointer;
+}
+
+.header-interno nav ul li a:hover,
+.header-interno nav ul li:hover > a {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  border-color: #666;
+}
+
+/* Submenú desplegable */
+.header-interno nav ul li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #222;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  padding: 10px 0;
+  min-width: 220px;
+  z-index: 10;
+  flex-direction: column;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.header-interno nav ul li:hover > ul {
+  display: flex !important;
+}
+
+/* Items del submenu */
+.header-interno nav ul li ul li a {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 0;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 0 rgba(255,255,255,0);
+}
+
+.header-interno nav ul li ul li a:hover {
+  background: #444;
+  color: #fff;
+  box-shadow: inset 4px 0 0 #999;
+}
+
+/* ---------------- CONTENIDO PRINCIPAL ---------------- */
+.contenido {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  color: #222;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.contenido h2 {
+  font-size: 2.6em;
+  margin-bottom: 35px;
+  color: #111;
+  font-weight: 700;
+}
+
+.servicios-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 35px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.servicio-card {
+  background: #e0e0e0;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+  padding: 35px 40px;
+  text-align: center;
+  max-width: 300px;
+  flex: 1 1 300px;
+  color: #111;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.servicio-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.servicio-card h3 {
+  color: #444;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.servicio-card p {
+  font-size: 1em;
+  line-height: 1.5;
+  color: #555;
+}
+
+.servicio-card.proximamente h3 {
+  color: #333;
+  font-weight: 700;
+}
+
+.servicio-card.proximamente p {
+  font-style: italic;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .servicios-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .servicio-card {
+    max-width: 90%;
+    flex: none;
+  }
+}
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos generales del body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #b0b0b0; /* Gris medio */
+  color: #222;
+}
+
+/* ---------------- LANDING (index.html) ---------------- */
+header {
+  background-image: url('img/ascii-pablopadev.png'); /* Cambia según tu imagen */
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh; /* Ocupa toda la pantalla */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centra verticalmente */
+  align-items: center;
+  text-align: center;
+  padding: 0;
+}
+
+header::before {
+  content: "";
+  background: rgba(0, 0, 0, 0.4); /* oscurece ligeramente la imagen */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+header h1 {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  font-size: 3em;
+  margin: 0 0 20px 0;
+}
+
+nav {
+  position: relative;
+  z-index: 2;
+  width: 60%;
+  max-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin: 0;
+}
+
+nav a {
+  flex: 1;
+  text-align: center;
+  padding: 15px 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 2px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 0 10px;
+  transition: background 0.3s, color 0.3s;
+  white-space: nowrap;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+nav a:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* ---------------- PÁGINAS INTERNAS ---------------- */
+.header-interno {
+  background-color: #222;
+  height: 300px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 10px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Menú principal en páginas internas */
+.header-interno nav {
+  width: 100%;
+  margin-top: auto;
+  position: relative;
+}
+
+.header-interno nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.header-interno nav ul li {
+  position: relative;
+}
+
+.header-interno nav ul li a {
+  display: block;
+  padding: 12px 25px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 0 rgba(255,255,255,0);
+  cursor: pointer;
+}
+
+.header-interno nav ul li a:hover,
+.header-interno nav ul li:hover > a {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  border-color: #666;
+}
+
+/* Submenú desplegable */
+.header-interno nav ul li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #222;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  padding: 10px 0;
+  min-width: 220px;
+  z-index: 10;
+  flex-direction: column;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.header-interno nav ul li:hover > ul {
+  display: flex !important;
+}
+
+/* Items del submenu */
+.header-interno nav ul li ul li a {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 0;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 0 rgba(255,255,255,0);
+}
+
+.header-interno nav ul li ul li a:hover {
+  background: #444;
+  color: #fff;
+  box-shadow: inset 4px 0 0 #999;
+}
+
+/* ---------------- CONTENIDO PRINCIPAL ---------------- */
+.contenido {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  color: #222;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.contenido h2 {
+  font-size: 2.6em;
+  margin-bottom: 35px;
+  color: #111;
+  font-weight: 700;
+}
+
+.servicios-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 35px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Servicio Card General */
+.servicio-card {
+  background: #e0e0e0;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+  padding: 35px 40px;
+  text-align: center;
+  max-width: 300px;
+  flex: 1 1 300px;
+  color: #111;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none; /* Eliminar subrayado */
+  display: block;
+}
+
+.servicio-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+/* Títulos de servicio */
+.servicio-card h3 {
+  color: #444;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+/* Párrafos de servicio */
+.servicio-card p {
+  font-size: 1em;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Estilos especiales para "Próximamente" */
+.servicio-card.proximamente h3 {
+  color: #333;
+  font-weight: 700;
+}
+
+.servicio-card.proximamente p {
+  font-style: italic;
+  color: #666;
+}
+
+/* Estilos específicos para cada servicio */
+.servicio-card.web h3 {
+  color: #2266cc;
+}
+.servicio-card.web p {
+  color: #444;
+}
+
+.servicio-card.bd h3 {
+  color: #228855;
+}
+.servicio-card.bd p {
+  color: #444;
+}
+
+.servicio-card.ia h3 {
+  color: #6a3d99;
+}
+.servicio-card.ia p {
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .servicios-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .servicio-card {
+    max-width: 90%;
+    flex: none;
+  }
+}
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos generales del body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #b0b0b0; /* Gris oscuro medio */
+  color: #222;
+  min-height: 100vh;
+}
+
+/* ---------------- HEADER INTERNO ---------------- */
+.header-interno {
+  background-color: #222;
+  height: 300px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 10px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Menú principal */
+.header-interno nav {
+  width: 100%;
+  margin-top: auto;
+  position: relative;
+}
+
+.header-interno nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.header-interno nav ul li {
+  position: relative;
+}
+
+.header-interno nav ul li a {
+  display: block;
+  padding: 12px 25px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 0 rgba(255,255,255,0);
+}
+
+.header-interno nav ul li a:hover,
+.header-interno nav ul li:hover > a {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  border-color: #227d2c;
+}
+
+/* ---------------- CONTENIDO PRINCIPAL ---------------- */
+.contenido {
+  max-width: 800px;
+  margin: 50px auto 80px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------- FORMULARIOS ---------------- */
+form {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #f8f8f8;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  color: #222;
+  box-sizing: border-box;
+}
+
+form p {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.1em;
+  color: #333;
+}
+
+form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  margin-top: 20px;
+  color: #444;
+}
+
+form select,
+form textarea,
+form input[type="text"],
+form input[type="email"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #666;
+  border-radius: 8px;
+  font-size: 1em;
+  color: #222;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  font-family: Arial, sans-serif;
+  resize: vertical;
+  background: #fff;
+}
+
+form select:hover,
+form textarea:hover,
+form input[type="text"]:hover,
+form input[type="email"]:hover {
+  border-color: #333;
+}
+
+form select:focus,
+form textarea:focus,
+form input[type="text"]:focus,
+form input[type="email"]:focus {
+  border-color: #000;
+  outline: none;
+  box-shadow: 0 0 6px #00000088;
+  background: #fff;
+}
+
+form textarea {
+  min-height: 90px;
+  margin-bottom: 10px;
+}
+
+form button[type="submit"] {
+  margin-top: 25px;
+  background-color: #000;
+  color: #fff;
+  padding: 14px 0;
+  width: 100%;
+  font-size: 1.2em;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: Arial, sans-serif;
+}
+
+form button[type="submit"]:hover {
+  background-color: #444;
+}
+
+/* Detalle presupuesto */
+.detalle-presupuesto {
+  margin-top: 25px;
+  font-size: 0.9em;
+  text-align: center;
+  color: #444;
+}
+
+.detalle-presupuesto ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+  color: #222;
+}
+
+.detalle-presupuesto ul li {
+  margin: 5px 0;
+}
+
+.total {
+  margin-top: 20px;
+  font-weight: 700;
+  color: #000;
+  font-size: 1.3em;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  form {
+    margin: 20px 15px;
+    padding: 25px;
+  }
+}
+/* ----------- ESTILO SOBRE MI ---------- */
+.sobre-mi {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
+  color: #222;
+}
+
+.sobre-mi img {
+  max-width: 300px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  flex: 0 0 300px;
+}
+
+.sobre-mi-texto {
+  flex: 1 1 400px;
+}
+
+.sobre-mi-texto h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #111;
+  font-weight: 700;
+}
+
+.sobre-mi-texto p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.sobre-mi-texto ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.sobre-mi-texto ul li {
+  margin-bottom: 8px;
+  font-size: 1em;
+  color: #f7f3f3;
+}
+.proyectos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.proyecto {
+  background-color: #222;
+  padding: 15px;
+  border-radius: 8px;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(13, 13, 13, 0.3);
+  transition: transform 0.2s;
+}
+
+.proyecto:hover {
+  transform: translateY(-5px);
+}
+
+.proyecto h3 {
+  margin-top: 0;
+}
+
+.proyecto a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #faf6f6;
+  text-decoration: underline;
+}
